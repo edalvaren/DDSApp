@@ -1,0 +1,14 @@
+.imgbox {
+    display: grid; 
+    height: 100%; 
+    max-height: 786px; 
+    max-width: inherit; 
+    vertical-align: central; 
+}
+
+$grid__bp-md: 768;
+
+.container {
+    max-width: $grid__bp-md * 1px;
+    margin: 0 auto;
+}
