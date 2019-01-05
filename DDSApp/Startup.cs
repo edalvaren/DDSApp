@@ -19,6 +19,7 @@ namespace DDSApp
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        //these are my dependency injections 
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -35,7 +36,7 @@ namespace DDSApp
                       "http://localhost:5000", "http://127.0.0.1:1880")
                       .AllowCredentials();
            }));
-
+            
             services.AddScoped<UserService>(); 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
