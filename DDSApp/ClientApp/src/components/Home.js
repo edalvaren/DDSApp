@@ -6,18 +6,16 @@ export class Home extends Component {
   render () {
     return (
       <div>
-        <h1> DDS Web App </h1> 
-    <h2> Spiral Tools Online</h2> 
-    <div class="imgbox">
-    <img class="img-fluid" src="./dds-lg.jpg"/> 
+        <h1> DDS Web App </h1>
+    <h2> Spiral Tools Online</h2>
+    <div className="imgbox">
+    <img className="img-fluid" src="./dds-lg.jpg" alt="background"/>
     </div>
-        <p>To help you get started, we have also set up:</p>
+        <p>Current Web app features</p>
         <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
+          <li><strong>Searchable Documentation</strong>. A single place <code>to search </code> and <code> download </code> reports, spiral analysis, manuals, etc. </li>
+          <li><strong>Remote Connectivity </strong>. You can enter a <code>support request online</code> and schedule a remote support session from anywhere.</li>
         </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
       </div>
     );
   }
