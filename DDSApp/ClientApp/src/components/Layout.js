@@ -12,6 +12,7 @@ export class Layout extends Component {
         <Container>
           {this.props.children}
         </Container>
+        <script src="../scripts/signal.js"></script>
       </div>
     );
   }

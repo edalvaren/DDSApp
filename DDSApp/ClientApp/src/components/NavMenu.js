@@ -11,7 +11,7 @@ export class NavMenu extends Component {
 
         this.toggleNavbar = this.toggleNavbar.bind(this);
         this.state = {
-            collapsed: true
+            collapsed: true,
         };
     }
 
@@ -37,7 +37,7 @@ export class NavMenu extends Component {
                                 <NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
                                 </NavItem>
-    `
+
                                 <NavItem>
                                     <NavLink tag={Link} className="text-dark" to="/spiralDocs"> Documentation </NavLink>
                                 </NavItem>
@@ -45,13 +45,13 @@ export class NavMenu extends Component {
                                     <NavLink tag={Link} className="text-dark" to="/Travel"> Useful Links </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/chat">Support</NavLink>
+                                <NavLink tag={Link} className="text-dark" to="/search">Search</NavLink>
                                 </NavItem>
                             </ul>
                             <form className="form-inline my-2 my-lg-0">
                             <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                            </input>
-                            <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>                            </form>
+                                </input>
+                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>                            </form>
                         </Collapse>
                     </Container>
                 </Navbar>

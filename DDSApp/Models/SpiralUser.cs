@@ -9,7 +9,6 @@ namespace DDSApp.Models
     {
         public ObjectId Id { get; set; }
 
-        [Required]
         [BsonElement("FirstName")]
         public string FirstName { get; set; }
 

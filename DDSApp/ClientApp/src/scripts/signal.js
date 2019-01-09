@@ -1,4 +1,4 @@
-import signalR from '@aspnet/signalr'
+var signalR = require('@aspnet/signalr')
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatter").build();
 
 connection.on("ReceiveMessage", function (user, message) {

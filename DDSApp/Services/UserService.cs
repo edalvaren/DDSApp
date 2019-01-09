@@ -9,24 +9,29 @@ namespace DDSApp.Services
 {
     public class UserService
     {
-        private readonly IMongoCollection<SpiralUser> _spiralUsers; 
+        private readonly IMongoCollection<SpiralUser> _spiralUsers;
 
         public UserService(IConfiguration config)
         {
             var client = new MongoClient(config.GetConnectionString("SpiralDb"));
             var database = client.GetDatabase("SpiralDb");
-            _spiralUsers = database.GetCollection<SpiralUser>("SpiralUsers"); 
+            _spiralUsers = database.GetCollection<SpiralUser>("SpiralUsers");
         }
         public List<SpiralUser> Get()
         {
             return _spiralUsers.Find(book => true).ToList();
         }
 
-        public SpiralUser Get(string id)
-        {
-            var docId = new ObjectId(id);
+        //public SpiralUser Get(string id)
+        //{
+        //    var docId = new ObjectId(id);
 
-            return _spiralUsers.Find<SpiralUser>(spiralUser => spiralUser.Id == docId).FirstOrDefault();
+        //    return _spiralUsers.Find<SpiralUser>(spiralUser => spiralUser.Id == docId).FirstOrDefault();
+        //}
+
+        public SpiralUser Get(string FirstName)
+        {
+            return _spiralUsers.Find<SpiralUser>(spiralUser => spiralUser.FirstName == FirstName).FirstOrDefault(); 
         }
 
         public SpiralUser Create(SpiralUser spiralUser)

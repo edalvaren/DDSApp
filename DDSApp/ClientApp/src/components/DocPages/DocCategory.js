@@ -1,8 +1,16 @@
 ﻿import React, { Component } from 'react';
-import { Card, Button, CardTitle, CardText, Col } from 'reactstrap';
+import { Card, CardTitle, CardText, CardLink, Col } from 'reactstrap';
 
 class DocCategory extends Component {
     static displayName = DocCategory.displayName;
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            docLink : ""
+        };
+    }
+
     render() {
         return (
             <Col sm="6">
@@ -10,10 +18,10 @@ class DocCategory extends Component {
                     <center>
                         <CardTitle>{this.props.CardTitle}</CardTitle>
                         <CardText>{this.props.CardText}</CardText>
-                        <Button>Browse</Button>
+             <CardLink href={this.props.docLink}>Browse </CardLink>
                     </center>
                 </Card>
             </Col>)
     }
 }
-export default DocCategory; 
+export default DocCategory;

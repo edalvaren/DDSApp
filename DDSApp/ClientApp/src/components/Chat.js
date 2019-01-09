@@ -14,7 +14,6 @@ function new_script(src) {
         document.body.appendChild(script);
     })
 };
-var chatScript = new_script('../scripts/signal.js');
 
 export class Chat extends Component {
     static displayName = Chat.name;
@@ -25,26 +24,10 @@ export class Chat extends Component {
             status: "start"
         };
     }
-    do_load = () => {
-        var self = this;
-        chatScript.then(function () {
-            self.setState({ 'status': 'done' });
-        }).catch(function () {
-            self.setState({ 'status': 'error' });
-        })
-    }
 
     render() {
-        var self = this;
-        if (self.state.status === 'start') {
-            self.state.status = 'loading';
-            setTimeout(function () {
-                self.do_load()
-            }, 5000);
-        }
         return (
                 <div className="container">
-                <div>{self.state.status}   {self.state.status === 'done' && 'here you can use the script loaded'}</div>
                 <div className="row">&nbsp;</div>
                 <div className="row">
                     <div className="col-6">&nbsp;</div>
