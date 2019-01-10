@@ -1,7 +1,6 @@
 ﻿import React, { Component } from 'react';
-import axios from 'axios'; 
+import axios from 'axios';
 
-const baseUri = ""; 
 
 export class DocSearchResults extends Component {
     static displayName = DocSearchResults.displayName;
@@ -16,6 +15,15 @@ export class DocSearchResults extends Component {
                 this.setState({ blobs })
             })
     }
+
+    render() {
+        return (
+            <div>
+                <p> Document search results to appear here </p> 
+            </div>
+        )
+    }
+
 }
     //constructor(props) {
     //    super(props);
@@ -27,7 +35,7 @@ export class DocSearchResults extends Component {
     //        });
     //}
 
-    
+
 
 //    static renderFilesTable(files) {
 //        return (

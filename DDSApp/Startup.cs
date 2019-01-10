@@ -1,11 +1,11 @@
+using DDSApp.Hubs;
+using DDSApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using DDSApp.Hubs;
-using DDSApp.Services;
 
 namespace DDSApp
 {
@@ -43,16 +43,35 @@ namespace DDSApp
             });
 
             services.AddCors(options => options.AddPolicy("CorsPolicy",
-           builder =>
-           {
-               builder.AllowAnyMethod().AllowAnyHeader()
-                      .WithOrigins(
-                       "http://localhost:3000",
-                      "http://localhost:55046",
-                      "http://localhost:5000",
-                      "http://127.0.0.1:1880")
-                      .AllowCredentials();
-           }));
+                builder => {
+    builder.AllowAnyMethod().AllowAnyHeader()
+           .WithOrigins(ChatHub.AllowedOrigins)
+           .AllowCredentials();
+}));
+
+
+
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("AllowSpecificOrigin",
+            //        builder => builder.WithOrigins("http://localhost:5000"));
+            //});
+
+            // services.AddCors(options => options.AddPolicy("CorsPolicy",
+            //builder =>
+            //{
+            //    builder.AllowAnyMethod().AllowAnyHeader()
+            //           .WithOrigins(
+            //           //"http://localhost:3000",
+            //           //"http://localhost:55046",
+            //           //"http://127.0.0.1:3000",
+            //           "http://127.0.0.1:3000/rsdrinx",
+            //           "http://localhost:3000/rsdrinx",
+            //           "http://localhost:5000/rsdrinx",
+            //           "http://127.0.0.1:5000/rsdrinx");
+            //           //"http://localhost:5000",
+            //           //"http://127.0.0.1:1880");
+            //}));
 
             #endregion
 
@@ -60,14 +79,22 @@ namespace DDSApp
             services.AddScoped<UserService>();
             services.AddScoped<SpiralDocService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-           
+
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
             services.AddSignalR();
-            services.AddHttpClient(); 
+            services.AddHttpClient();
+
+            // Node Services
+            services.AddNodeServices(options =>
+            {
+                options.ProjectPath = "./Services/";
+            }
+            );
+
 
         }
 
@@ -83,12 +110,23 @@ namespace DDSApp
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseCors(builder =>
-            {
-                builder.AllowAnyOrigin();
-            });
+            app.UseCors("CorsPolicy");
+
+
+            //app.UseCors(builder =>
+            //{
+            //    builder.WithOrigins("http://localhost:5000").AllowAnyHeader().AllowAnyOrigin().AllowCredentials().AllowAnyMethod().Build(); 
+            //});
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("http://localhost:5000")
+                    .AllowAnyHeader()
+                    .WithMethods("GET", "POST")
+                    .AllowCredentials();
+            });
 
             app.UseMvc(routes =>
             {
@@ -100,17 +138,21 @@ namespace DDSApp
             app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatHub>("/chatter");
+                routes.MapHub<StreamHub>("/netflix");
             });
+
 
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
-
                 if (env.IsDevelopment())
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+
+
+
         }
     }
 }

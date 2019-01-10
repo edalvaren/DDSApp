@@ -34,6 +34,13 @@ namespace DDSApp.Services
             return _spiralDocs.Find<SpiralDoc>(SpiralDoc => SpiralDoc.Title == Title).FirstOrDefault();
         }
 
+        public List<SpiralDoc> GetByCategory(string Category)
+        {
+            var builder = Builders<BsonDocument>.Filter;
+            var filter = builder.Eq("Category", Category);
+            return _spiralDocs.Find<SpiralDoc>(SpiralDoc => SpiralDoc.Category == Category).ToList(); 
+        }
+
         public SpiralDoc Create(SpiralDoc SpiralDoc)
         {
             _spiralDocs.InsertOne(SpiralDoc);

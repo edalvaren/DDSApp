@@ -1,0 +1,16 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "ethernet-ip@1.2.4",
+      "destination": "lib/ethernet-ip/"
+    }
+  ,
+{
+  "provider": "unpkg",
+  "library": "html-pdf@2.1.0",
+  "destination": "lib/html-pdf/"
+}
+]
+}

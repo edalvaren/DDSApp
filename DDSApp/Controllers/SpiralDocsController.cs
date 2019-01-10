@@ -34,6 +34,11 @@ namespace DDSApp.Controllers
             return SpiralDoc;
         }
 
+        [HttpGet("{category}", Name ="GetSpiralDocsByCat")]
+        public ActionResult<List<SpiralDoc>> GetByCategory(string category)
+        {
+            return _docService.GetByCategory(category); 
+        }
 
         [HttpPost]
         public ActionResult<SpiralDoc> Create(SpiralDoc SpiralDoc)

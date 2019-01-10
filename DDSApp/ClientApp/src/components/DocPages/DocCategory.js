@@ -7,7 +7,8 @@ class DocCategory extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            docLink : ""
+            docLink : "",
+            category: ""
         };
     }
 
@@ -18,7 +19,7 @@ class DocCategory extends Component {
                     <center>
                         <CardTitle>{this.props.CardTitle}</CardTitle>
                         <CardText>{this.props.CardText}</CardText>
-             <CardLink href={this.props.docLink}>Browse </CardLink>
+                     <CardLink href={this.props.docLink}> Browse </CardLink>
                     </center>
                 </Card>
             </Col>)

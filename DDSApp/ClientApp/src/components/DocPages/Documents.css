@@ -1,0 +1,8 @@
+.docLink {
+    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #003D7F;
+}
+.docLink:hover{
+    color: #65AFFF;
+}

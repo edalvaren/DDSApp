@@ -42,10 +42,10 @@ export class NavMenu extends Component {
                                     <NavLink tag={Link} className="text-dark" to="/spiralDocs"> Documentation </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink tag={Link} className="text-dark" to="/Travel"> Useful Links </NavLink>
+                                <NavLink tag={Link} className="text-dark" to="/search">Search</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                <NavLink tag={Link} className="text-dark" to="/search">Search</NavLink>
+                                <NavLink tag={Link} className="text-dark" to="/rsDrinx">RsDrinx™</NavLink>
                                 </NavItem>
                             </ul>
                             <form className="form-inline my-2 my-lg-0">
