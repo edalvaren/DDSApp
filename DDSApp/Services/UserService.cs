@@ -7,8 +7,8 @@ using MongoDB.Driver;
 
 namespace DDSApp.Services
 {
-    public class UserService
-    {
+    public class UserService { 
+    
         private readonly IMongoCollection<SpiralUser> _spiralUsers;
 
         public UserService(IConfiguration config)

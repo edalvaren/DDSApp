@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
+
+const TitleStyled = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+  `;
+
+const Wrapper = styled.section`
+    padding: 4em;
+    background: papayawhip;
+    `;
 
 export class Home extends Component {
   static displayName = Home.name;
 
-  render () {
+  render() {
     return (
       <div>
         <h1> DDS Web App </h1>
-    <h2> Spiral Tools Online</h2>
-    <div className="imgbox">
-    <img className="img-fluid" src="./dds-lg.jpg" alt="background"/>
-    </div>
+        <h2> Spiral Tools Online</h2>
+        <div className="imgbox">
+          <img className="img-fluid" src="./dds-lg.jpg" alt="background" />
+        </div>
         <p>Current Web app features</p>
         <ul>
           <li><strong>Searchable Documentation</strong>. A single place <code>to search </code> and <code> download </code> reports, spiral analysis, manuals, etc. </li>

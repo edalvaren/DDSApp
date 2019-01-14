@@ -34,7 +34,6 @@ namespace DDSApp
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-
             #region Cookies and CORS
             services.Configure<CookiePolicyOptions>(options =>
             {
