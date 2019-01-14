@@ -24,7 +24,8 @@ namespace DDSApp.Services
                 string searchServiceName = config.GetSection("AzureSearch")["SearchServiceName"];
                 string adminApiKey = config.GetSection("AzureSearch")["SearchServiceAdminApiKey"];
                 _searchClient = new SearchServiceClient(searchServiceName, new SearchCredentials(adminApiKey));
-                _indexClient = _searchClient.Indexes.GetClient("spiraldocsindex");
+                //_indexClient = _searchClient.Indexes.GetClient("spiraldocsindex");
+                _indexClient = _searchClient.Indexes.GetClient("azureblob-index");
             }
             catch (Exception e)
             {
@@ -37,7 +38,14 @@ namespace DDSApp.Services
         {
             try
             {
-                SearchParameters sp = new SearchParameters() { SearchMode = SearchMode.All };
+                SearchParameters sp = new SearchParameters()
+                {
+                    SearchMode = SearchMode.All,
+                    IncludeTotalResultCount = true,
+                    QueryType = QueryType.Full,
+                    Select = new[] {"people", "metadata_storage_path", "organizations", "locations", "keyphrases"},
+                    Top = 5
+                };
                 return _indexClient.Documents.Search(searchText, sp); 
             }
             catch (Exception ex)

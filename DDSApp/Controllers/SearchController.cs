@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Search.Models;
 using DDSApp.Services;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json; 
 
 namespace DDSApp.Controllers
 {
@@ -24,7 +25,6 @@ namespace DDSApp.Controllers
            
             return View();
         }
-
 
         public JsonResult Search(string q = "")
         {

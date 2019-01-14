@@ -13,5 +13,19 @@ const Wrapper = styled.section`
     background: papayawhip;
 `;
 
-module.exports.Wrapper = Wrapper;
-module.exports.Title = Title;
+export class StyledTitle extends Component{
+    static displayName = StyledTitle.displayName;
+
+    render() {
+        return(
+            <div>
+            <Wrapper>
+                <Title> DirectDrive™ </Title>
+            </Wrapper>
+            </div>
+        )
+    }
+
+
+
+}
