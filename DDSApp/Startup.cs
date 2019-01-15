@@ -42,11 +42,12 @@ namespace DDSApp
             });
 
             services.AddCors(options => options.AddPolicy("CorsPolicy",
-                builder => {
-    builder.AllowAnyMethod().AllowAnyHeader()
-           .WithOrigins(ChatHub.AllowedOrigins)
-           .AllowCredentials();
-}));
+                builder =>
+                {
+                    builder.AllowAnyMethod().AllowAnyHeader()
+                           .WithOrigins(ChatHub.AllowedOrigins)
+                           .AllowCredentials();
+                }));
 
 
 

@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Azure.Search;
 using Microsoft.Azure.Search.Models;
 using System.IO;
+using DDSApp.Models; 
 
 namespace DDSApp.Services
 {
@@ -25,7 +26,7 @@ namespace DDSApp.Services
                 string adminApiKey = config.GetSection("AzureSearch")["SearchServiceAdminApiKey"];
                 _searchClient = new SearchServiceClient(searchServiceName, new SearchCredentials(adminApiKey));
                 //_indexClient = _searchClient.Indexes.GetClient("spiraldocsindex");
-                _indexClient = _searchClient.Indexes.GetClient("azureblob-index");
+                _indexClient = _searchClient.Indexes.GetClient("azureblob-index3");
             }
             catch (Exception e)
             {
@@ -33,6 +34,18 @@ namespace DDSApp.Services
             }
         }
 
+        public DocumentSearchResult Get()
+        {
+            SearchParameters sp = new SearchParameters()
+            {
+                SearchMode = SearchMode.All,
+                QueryType = QueryType.Simple,
+                Select = new[] { "people", "metadata_storage_path", "metadata_storage_name", "organizations", "locations", "keyphrases" },
+                Top = 15
+            };
+            var searchFound  = _indexClient.Documents.Search("", sp);
+            return searchFound;
+        }
 
         public DocumentSearchResult Search(string searchText)
         {
@@ -40,10 +53,10 @@ namespace DDSApp.Services
             {
                 SearchParameters sp = new SearchParameters()
                 {
-                    SearchMode = SearchMode.All,
-                    IncludeTotalResultCount = true,
-                    QueryType = QueryType.Full,
-                    Select = new[] {"people", "metadata_storage_path", "organizations", "locations", "keyphrases"},
+                    SearchMode = SearchMode.Any,
+                    IncludeTotalResultCount = false,
+                    QueryType = QueryType.Simple,
+                    Select = new[] {"people", "metadata_storage_path", "metadata_storage_name", "organizations", "locations", "keyphrases"},
                     Top = 5
                 };
                 return _indexClient.Documents.Search(searchText, sp); 

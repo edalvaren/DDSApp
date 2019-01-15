@@ -1,82 +1,93 @@
 ﻿import React, { Component } from 'react';
-import axios from 'axios';
-
+import { Table } from 'reactstrap';
 
 export class DocSearchResults extends Component {
     static displayName = DocSearchResults.displayName;
-    state = {
-        blobs: []
+    constructor(props) {
+        super(props);
+        this.state = { docs: [], loading: true, searchQuery: '', searching: false };
     }
 
-    componentDidMount() {
-        axios.get('')
-            .then(res => {
-                const blobs = res.data;
-                this.setState({ blobs })
-            })
+
+
+    componentDidUpdate(prevProps) {
+        if (this.props.loadSearch !== prevProps.loadSearch) {
+            if (this.props.searchQuery !== prevProps.searchQuery) {
+            this.setState({ loadSearch: this.props.loadSearch })
+            this.setState({searchQuery: this.props.searchQuery})
+                const { searchQuery } = this.state.searchQuery;
+                fetch(`http://localhost:5000/api/search/${this.state.searchQuery}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        this.setState({ docs: data, loading: false })
+                    });
+            }
+        }
     }
+
+
+    static renderDocumentTable(docs) {
+        return (
+            <Table striped bordered>
+                <thead>
+                    <tr>
+                        <th>Document Name</th>
+                        <th>Key Phrases </th>
+
+                        <th>People</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {docs.results.map(doc =>
+                        <tr key={doc.document}>
+                            <td> <a href={DocSearchResults.DecodeStringWithTrailing(doc.document.metadata_storage_path)}>
+
+                            {doc.document.metadata_storage_name}</a>  </td>
+                            <td> {doc.document.locations.map((place) =>
+                                <ul> <li> {place} </li></ul>)}</td>
+                            <td> {doc.document.keyphrases.map((person) =>
+                                <ul> <li> {person} </li></ul>)}
+                            </td>
+                            <td>
+                            {doc.document.people.map((person) =>
+                            <ul> <li> {person} </li></ul>)}
+                           </td>
+
+                        </tr>)}
+
+                </tbody>
+            </Table>
+        );
+    }
+
+    /*
+    * Removes the trailing character from a string and decodes
+    *@param base64String string to be decoded
+    */
+    static DecodeStringWithTrailing(base64String) {
+        var stringLength = base64String.length - 1;
+        var noTrail = base64String.substring(0, stringLength);
+
+        return atob(noTrail);
+    }
+
+
 
     render() {
+        let contents = this.state.loading
+            ? <p> <em> ...Loading </em> </p>
+            : DocSearchResults.renderDocumentTable(this.state.docs);
         return (
+
             <div>
-                <p> Document search results to appear here </p> 
+                {contents}
             </div>
-        )
+        );
     }
 
 }
-    //constructor(props) {
-    //    super(props);
-    //    this.state = { users: [], loading: true };
-    //    fetch('http://localhost:5000/api/spiralusers/')
-    //        .then(response => response.json())
-    //        .then(data => {
-    //            this.setState({ users: data, loading: false })
-    //        });
-    //}
 
 
 
-//    static renderFilesTable(files) {
-//        return (
-//            <table className='table table-striped'>
-//                <thead>
-//                    <tr>
-//                        <th>First Name</th>
-//                        <th>Last Name</th>
-//                        <th>Title</th>
-//                        <th> Team </th>
-//                        <th> Email </th>
-//                    </tr>
-//                </thead>
-//                <tbody>
-//                    {files.map(file =>
-//                        <tr key={file.id}>
-//                            <td> {file.firstName}</td>
-//                            <td> {file.lastName} </td>
-//                            <td> {file.title}</td>
-//                            <td> {file.team} </td>
-//                            <td> {file.email} </td>
 
-//                        </tr>)}
-
-//                </tbody>
-//            </table>
-//        );
-//    }
-
-//    render() {
-//        let contents = this.state.loading
-//            ? <p><em>Loading...</em></p>
-//            : DocSearchResults.renderFilesTable(this.state.files);
-
-//        return (
-//            <div>
-//                <h1>Spiral Team</h1>
-//                {contents}
-//            </div >
-//        );
-
-
-//    }
-//}

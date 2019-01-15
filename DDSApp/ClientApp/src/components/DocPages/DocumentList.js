@@ -2,6 +2,7 @@
 import { Table } from 'reactstrap'
 import './Documents.css'
 
+
 export class DocumentList extends Component {
     static displayName = DocumentList.displayName;
     constructor(props) {
