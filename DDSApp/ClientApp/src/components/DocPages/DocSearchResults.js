@@ -1,5 +1,13 @@
 ﻿import React, { Component } from 'react';
-import { Table } from 'reactstrap';
+import TableRowAz from './StyledDocs/TableRowAz';
+import Table from '../styled/StyledTable';
+/*
+**Styled Table
+*/
+
+
+const DocResultsHead = ["Document Name", "Locations", "People", "Organizations"];
+
 
 export class DocSearchResults extends Component {
     static displayName = DocSearchResults.displayName;
@@ -9,13 +17,20 @@ export class DocSearchResults extends Component {
     }
 
 
+    updateComponent(query){
+        this.setState({searchQuery: this.props.searchQuery});
+        fetch(`http://localhost:5000/api/search/${this.state.searchQuery}`)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ docs: data, loading: false })
+            });
+        }
 
     componentDidUpdate(prevProps) {
         if (this.props.loadSearch !== prevProps.loadSearch) {
             if (this.props.searchQuery !== prevProps.searchQuery) {
-            this.setState({ loadSearch: this.props.loadSearch })
-            this.setState({searchQuery: this.props.searchQuery})
-                const { searchQuery } = this.state.searchQuery;
+                this.setState({ loadSearch: false })
+                this.setState({ searchQuery: this.props.searchQuery })
                 fetch(`http://localhost:5000/api/search/${this.state.searchQuery}`)
                     .then(response => response.json())
                     .then(data => {
@@ -26,37 +41,13 @@ export class DocSearchResults extends Component {
     }
 
 
+
     static renderDocumentTable(docs) {
         return (
-            <Table striped bordered>
-                <thead>
-                    <tr>
-                        <th>Document Name</th>
-                        <th>Key Phrases </th>
+            <Table head={DocResultsHead} >
+                <TableRowAz docs={docs}>
 
-                        <th>People</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    {docs.results.map(doc =>
-                        <tr key={doc.document}>
-                            <td> <a href={DocSearchResults.DecodeStringWithTrailing(doc.document.metadata_storage_path)}>
-
-                            {doc.document.metadata_storage_name}</a>  </td>
-                            <td> {doc.document.locations.map((place) =>
-                                <ul> <li> {place} </li></ul>)}</td>
-                            <td> {doc.document.keyphrases.map((person) =>
-                                <ul> <li> {person} </li></ul>)}
-                            </td>
-                            <td>
-                            {doc.document.people.map((person) =>
-                            <ul> <li> {person} </li></ul>)}
-                           </td>
-
-                        </tr>)}
-
-                </tbody>
+                </TableRowAz>
             </Table>
         );
     }
