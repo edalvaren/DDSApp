@@ -5,7 +5,6 @@
 		}
 	],
 	"settings": {
-		"git.ignoreLimitWarning": true,
-		"better-comments.highlightPlainText": true
+		"git.ignoreLimitWarning": true
 	}
 }
