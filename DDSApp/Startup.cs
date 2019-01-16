@@ -11,6 +11,7 @@ namespace DDSApp
 {
     public class Startup
     {
+        private string _azureApiKey = null; 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -95,8 +96,11 @@ namespace DDSApp
             }
             );
 
-
+            //Retrieve API Keys for Azure Blob Storage 
+            _azureApiKey = Configuration["Storage:UserKey1"]; 
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)

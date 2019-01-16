@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
 import { SpiralDocs } from './components/DocPages/SpiralDocs';
 import { DocumentList } from './components/DocPages/DocumentList';
 import { Admin } from './components/admin/Admin';
@@ -27,7 +26,6 @@ export default class App extends Component {
                     {/* Admin Panel Components */}
                 <Route path='/admin' component={Admin}/>
                 <Route path='/admin/spiralUsers' component={SpiralUsers} />
-                <Route path='/fetch-data' component={FetchData} />
                 <Route path='/search' component={SearchBar} />
 
             </Layout>

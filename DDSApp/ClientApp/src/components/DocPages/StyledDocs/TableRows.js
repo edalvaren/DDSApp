@@ -6,7 +6,7 @@ function TableRows(props){
         <tbody>
             {props.docs.map(function (doc, i) {
                 return (<Row key={doc.id}>
-                    <StRow as="a" href={props.props1}>{doc.title} </StRow>
+                    <StRow as="a" href={doc.url}>{doc.title} </StRow>
                        <StRow> {doc.topic} </StRow>
                         <StRow>{doc.category} </StRow>
                 </Row>

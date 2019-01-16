@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration; 
 using Microsoft.Azure.Search;
 using Microsoft.Azure.Search.Models;
-using System.IO;
-using DDSApp.Models; 
 
 namespace DDSApp.Services
 {
@@ -23,14 +18,14 @@ namespace DDSApp.Services
             try
             {
                 string searchServiceName = config.GetSection("AzureSearch")["SearchServiceName"];
-                string adminApiKey = config.GetSection("AzureSearch")["SearchServiceAdminApiKey"];
+                string adminApiKey = DocsSearchService.APIKey(config); 
                 _searchClient = new SearchServiceClient(searchServiceName, new SearchCredentials(adminApiKey));
                 //_indexClient = _searchClient.Indexes.GetClient("spiraldocsindex");
                 _indexClient = _searchClient.Indexes.GetClient("azureblob-index3");
             }
             catch (Exception e)
             {
-                errorMessage = e.Message.ToString(); 
+                errorMessage = e.Message.ToString();
             }
         }
 
@@ -43,7 +38,7 @@ namespace DDSApp.Services
                 Select = new[] { "people", "metadata_storage_path", "metadata_storage_name", "organizations", "locations", "keyphrases" },
                 Top = 15
             };
-            var searchFound  = _indexClient.Documents.Search("", sp);
+            var searchFound = _indexClient.Documents.Search("", sp);
             return searchFound;
         }
 
@@ -56,16 +51,16 @@ namespace DDSApp.Services
                     SearchMode = SearchMode.Any,
                     IncludeTotalResultCount = false,
                     QueryType = QueryType.Simple,
-                    Select = new[] {"people", "metadata_storage_path", "metadata_storage_name", "organizations", "locations", "keyphrases"},
+                    Select = new[] { "people", "metadata_storage_path", "metadata_storage_name", "organizations", "locations", "keyphrases" },
                     Top = 5
                 };
-                return _indexClient.Documents.Search(searchText, sp); 
+                return _indexClient.Documents.Search(searchText, sp);
             }
             catch (Exception ex)
             {
-                errorMessage = ex.Message.ToString(); 
+                errorMessage = ex.Message.ToString();
             }
-            return null; 
+            return null;
         }
 
         private static SearchServiceClient CreateSearchServiceClient(IConfiguration configuration)
@@ -76,6 +71,12 @@ namespace DDSApp.Services
             SearchServiceClient serviceClient = new SearchServiceClient(searchServiceName, new SearchCredentials(adminApiKey));
             return serviceClient;
         }
+
+        private static string APIKey(IConfiguration config)
+        {
+            return config["Storage:UserKey1"];
+        }
+
     }
 
  
