@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using DDSApp.Models;
 using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
@@ -63,6 +64,7 @@ namespace DDSApp.Services
         {
             _spiralDocs.DeleteOne(SpiralDoc => SpiralDoc.Id == id);
         }
+
     }
 }
 

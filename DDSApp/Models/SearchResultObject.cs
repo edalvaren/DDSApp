@@ -43,7 +43,6 @@ namespace DDSApp.Models
         [JsonProperty("metadata_storage_name")]
         public string MetadataStorageName { get; set; }
 
-
         [JsonProperty("metadata_storage_path")]
         public string MetadataStoragePath { get; set; }
 

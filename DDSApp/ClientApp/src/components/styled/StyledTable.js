@@ -1,14 +1,34 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import React from 'react';
 import rem from './utils/rem';
 import {lightGrey, themeDark} from './utils/colors';
 import { headerFont } from './utils/fonts';
 
+
+const sizes = {
+  desktop: 992,
+  tablet: 768,
+  phone: 576,
+}
+
+const media = Object.keys(sizes).reduce((acc, label) => {
+  acc[label] = (...args) => css`
+    @media (max-width: ${sizes[label] / 16}em) {
+      ${css(...args)}
+    }
+  `
+
+  return acc
+}, {})
+
 export const TableWrapper = styled.table`
-  table-layout: fixed;
   width: 100%;
   text-align: left;
   margin: ${rem(40)} 0;
+
+  ${media.desktop`max-width: 900px;`}
+  ${media.tablet`max-width: 700px;`}
+  ${media.phone`max-width: 500px;`}
 `;
 
 const TableHead = styled.thead`
@@ -30,7 +50,9 @@ export const Row = styled.tr`
 export const StRow = styled.td.attrs({
 
 })`
+  margin: 5px;
   padding: 2px;
+  word-wrap: break-word;
   &:hover {
   }
   `;

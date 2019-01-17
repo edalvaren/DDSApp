@@ -35,7 +35,7 @@ namespace DDSApp.Services
             {
                 SearchMode = SearchMode.All,
                 QueryType = QueryType.Simple,
-                Select = new[] { "people", "metadata_storage_path", "metadata_storage_name", "organizations", "locations", "keyphrases" },
+                Select = new[] { "people","metadata_storage_path", "metadata_storage_name", "organizations", "locations", "keyphrases" },
                 Top = 15
             };
             var searchFound = _indexClient.Documents.Search("", sp);
@@ -72,9 +72,14 @@ namespace DDSApp.Services
             return serviceClient;
         }
 
+        /// <summary>
+        /// Returns the secret for the Azure Search Account 
+        /// </summary>
+        /// <param name="config"> Dependency Injection using IConfiguration</param>
+        /// <returns></returns>
         private static string APIKey(IConfiguration config)
         {
-            return config["Storage:UserKey1"];
+            return config["Search:UserKey1"];
         }
 
     }

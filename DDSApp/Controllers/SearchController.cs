@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Search.Models;
 using DDSApp.Services;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using DDSApp.Models; 
+using DDSApp.Models;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Microsoft.AspNetCore.Http; 
 
 namespace DDSApp.Controllers
 {
@@ -48,6 +48,25 @@ namespace DDSApp.Controllers
 
             return Json(data);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadFileAsync(List<IFormFile> files)
+        {
+            long size = files.Sum(f => f.Length);
+            var filePath = Path.GetTempFileName();
+            foreach (var formFile in files)
+            {
+                if (formFile.Length > 0)
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
+            return Ok(new { count = files.Count, size, filePath });
+
+    }
 
 
     }

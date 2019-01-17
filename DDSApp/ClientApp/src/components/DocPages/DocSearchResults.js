@@ -26,6 +26,7 @@ export class DocSearchResults extends Component {
             });
         }
 
+
     componentDidUpdate(prevProps) {
         if (this.props.loadSearch !== prevProps.loadSearch) {
             if (this.props.searchQuery !== prevProps.searchQuery) {
