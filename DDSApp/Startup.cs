@@ -44,7 +44,6 @@ namespace DDSApp
                 builder =>
                 {
                     builder.AllowAnyMethod().AllowAnyHeader()
-                           .WithOrigins(ChatHub.AllowedOrigins)
                            .AllowCredentials();
                 }));
 
