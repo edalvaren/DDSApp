@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace DDSApp.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/Search")]
     [ApiController]
     public class SearchController : Controller
     {
@@ -23,18 +23,18 @@ namespace DDSApp.Controllers
             
         }
 
-        [HttpGet]
-        public ActionResult<DocumentSearchResult> Get()
-        {
-            var data = _docsSearch.Get();
-            return data; 
-        }
+        //[HttpGet]
+        //public ActionResult<DocumentSearchResult> Get()
+        //{
+        //    var data = _docsSearch.Get();
+        //    return data; 
+        //}
 
-        public IActionResult Index()
-        {
+        //public IActionResult Index()
+        //{
            
-            return View();
-        }
+        //    return View();
+        //}
 
         [HttpGet("{searchQuery}", Name = "SearchbyQuery")]
         public JsonResult Search(string searchQuery)

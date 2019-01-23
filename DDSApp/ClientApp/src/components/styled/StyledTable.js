@@ -1,7 +1,7 @@
 import styled, {css} from 'styled-components';
 import React from 'react';
 import rem from './utils/rem';
-import {lightGrey, themeDark} from './utils/colors';
+import {lightGrey, themeDark, themeBlue, themeMedium, themeLight} from './utils/colors';
 import { headerFont } from './utils/fonts';
 
 
@@ -37,6 +37,7 @@ const TableHead = styled.thead`
 `;
 
 export const Row = styled.tr`
+  align-content: top;
   padding: 0 ${rem(20)};
   padding-left: 0;
   &:hover {
@@ -57,6 +58,20 @@ export const StRow = styled.td.attrs({
   }
   `;
 
+export const StLink = styled.a`
+  margin: 5px;
+  padding: 2px;
+  font-style: bold;
+  text-decoration: underline;
+  color: ${themeMedium};
+  &:hover {
+    color: white;
+    background-color: red;
+  }
+  &:link {
+  color: ${themeBlue};
+  }
+`
 
 export const Column = styled.th`
   font-weight: normal;

@@ -30,9 +30,7 @@ export const SearchForm = styled.form`
     }
     `;
 
-export const InputBox = styled.input.attrs({
-    type: 'text'
-})`
+export const InputBox = styled.input`
     position: absolute;
     top: 0;
     left: 0;

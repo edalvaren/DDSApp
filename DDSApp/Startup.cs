@@ -30,7 +30,6 @@ namespace DDSApp
         ///----------------UserService - for retrieving users from MongoDb Database
         ///----------------SPA for React Js Integration
         ///----------------MVC - Model View Controller Support
-        ///----------------SignalR - Add real time functionality via the use of Web Sockets and Hubs.
         /// </summary>
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
@@ -86,7 +85,6 @@ namespace DDSApp
             {
                 configuration.RootPath = "ClientApp/build";
             });
-            services.AddSignalR();
             services.AddHttpClient();
 
             // Node Services
@@ -139,12 +137,7 @@ namespace DDSApp
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<ChatHub>("/chatter");
-                routes.MapHub<StreamHub>("/netflix");
-            });
-
+      
 
             app.UseSpa(spa =>
             {

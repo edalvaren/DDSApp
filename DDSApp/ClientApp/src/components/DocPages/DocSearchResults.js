@@ -18,7 +18,7 @@ export class DocSearchResults extends Component {
 
 
     updateComponent(query){
-        this.setState({searchQuery: this.props.searchQuery});
+        this.setState({searchQuery: query})
         fetch(`http://localhost:5000/api/search/${this.state.searchQuery}`)
             .then(response => response.json())
             .then(data => {
@@ -28,18 +28,25 @@ export class DocSearchResults extends Component {
 
 
     componentDidUpdate(prevProps) {
-        if (this.props.loadSearch !== prevProps.loadSearch) {
-            if (this.props.searchQuery !== prevProps.searchQuery) {
-                this.setState({ loadSearch: false })
-                this.setState({ searchQuery: this.props.searchQuery })
-                fetch(`http://localhost:5000/api/search/${this.state.searchQuery}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        this.setState({ docs: data, loading: false })
-                    });
-            }
+        if (this.props.searchQuery !== prevProps.searchQuery) {
+            this.setState({searchQuery: this.props.searchQuery});
         }
     }
+
+
+    // componentDidUpdate(prevProps) {
+    //     if (this.props.loadSearch !== prevProps.loadSearch) {
+    //         if (this.props.searchQuery !== prevProps.searchQuery) {
+    //             this.setState({ loadSearch: false })
+    //             this.setState({ searchQuery: this.props.searchQuery })
+    //             fetch(`http://localhost:5000/api/search/${this.state.searchQuery}`)
+    //                 .then(response => response.json())
+    //                 .then(data => {
+    //                     this.setState({ docs: data, loading: false })
+    //                 });
+    //         }
+    //     }
+    // }
 
 
 
@@ -71,7 +78,6 @@ export class DocSearchResults extends Component {
             ? <p> <em> ...Loading </em> </p>
             : DocSearchResults.renderDocumentTable(this.state.docs);
         return (
-
             <div>
                 {contents}
             </div>

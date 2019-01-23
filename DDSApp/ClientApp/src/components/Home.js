@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../styles/index.scss';
 
 export class Home extends Component {
   static displayName = Home.name;
@@ -6,9 +7,9 @@ export class Home extends Component {
   render() {
     return (
       <div>
-        <h1> DDS Web App </h1>
-        <h2> Spiral Tools Online</h2>
-        <div className="imgbox">
+        <h1 className='main-title'> Spiral App </h1>
+        <h2> STG Document Site  </h2>
+        <div>
           <img className="img-fluid" src="./dds-lg.jpg" alt="background" />
         </div>
         <p> Features</p>

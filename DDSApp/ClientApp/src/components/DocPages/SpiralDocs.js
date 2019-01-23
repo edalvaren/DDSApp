@@ -1,6 +1,14 @@
 ﻿import React, { Component } from 'react';
-import { CardGroup, Row, Col} from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { CardGroup, Row, Col, Button} from 'reactstrap';
 import DocCategory from "./DocCategory"
+import styled from 'styled-components';
+
+const StyledLink = styled(Link)`
+    font-weight: bold;
+    color: white;
+`;
+
 
 export class SpiralDocs extends Component {
     static displayName = SpiralDocs.displayName;
@@ -31,6 +39,9 @@ export class SpiralDocs extends Component {
                     </CardGroup>
                     </Col>
                 </Row>
+                <br />
+                <p> Something missing? Add it to the Spiral Docs Database. <br/>
+                    <Button type> <StyledLink to='/spiralDocs/create'>  Click to Upload a New Document </StyledLink>   </Button> </p>
             </div>
         )
     }
