@@ -1,4 +1,3 @@
-using DDSApp.Hubs;
 using DDSApp.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.AspNetCore.HttpOverrides;
 namespace DDSApp
 {
     public class Startup
@@ -45,7 +44,6 @@ namespace DDSApp
                 builder =>
                 {
                     builder.AllowAnyMethod().AllowAnyHeader()
-                           .WithOrigins(ChatHub.AllowedOrigins)
                            .AllowCredentials();
                 }));
 
@@ -111,6 +109,14 @@ namespace DDSApp
             {
                 app.UseExceptionHandler("/Error");
             }
+
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
+            app.UseAuthentication(); 
 
             app.UseCors("CorsPolicy");
 
