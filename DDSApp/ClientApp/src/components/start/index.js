@@ -1,3 +1,3 @@
-import {Home} from './Home';
+import FullWidthGrid from './AppLayout';
 
-export default Home;
+export default FullWidthGrid;

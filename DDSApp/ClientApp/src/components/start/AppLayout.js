@@ -3,48 +3,64 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import {MainImage} from './Home';
+import Logo from '../logo';
 
 const styles = theme => ({
     root: {
         flexGrow: 1,
     },
+    container: {
+        display: 'grid',
+        gridTemplateColumns: 'repeat(12, 1fr)',
+        gridGap: `${theme.spacing.unit * 3}px`,
+    },
     paper: {
-        padding: theme.spacing.unit * 2,
+        padding: theme.spacing.unit,
         textAlign: 'center',
         color: theme.palette.text.secondary,
+        whiteSpace: 'nowrap',
+        marginBottom: theme.spacing.unit,
+    },
+    divider: {
+        margin: `${theme.spacing.unit * 2}px 0`,
     },
 });
 
-function FullWidthGrid(props){
+function FullWidthGrid(props) {
     const { classes } = props;
 
     return (
         <div className={classes.root}>
-            <Grid container spacing={24}>
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>xs=12</Paper>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <Paper className={classes.paper}>xs=12 sm=6</Paper>
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <Paper className={classes.paper}>xs=12 sm=6</Paper>
-                </Grid>
-                <Grid item xs={6} sm={3}>
-                    <Paper className={classes.paper}>xs=6 sm=3</Paper>
-                </Grid>
-                <Grid item xs={6} sm={3}>
-                    <Paper className={classes.paper}>xs=6 sm=3</Paper>
-                </Grid>
-                <Grid item xs={6} sm={3}>
-                    <Paper className={classes.paper}>xs=6 sm=3</Paper>
-                </Grid>
-                <Grid item xs={6} sm={3}>
-                    <Paper className={classes.paper}>xs=6 sm=3</Paper>
-                </Grid>
+        <Grid container spacing={16}>
+            <Grid item xs={12}>
+                <Paper className={classes.paper}>
+                    <Typography variant="h4" gutterbottom> Spiral WebApp </Typography>
+                    <Typography variant="caption" gutterBottom> DirectDrive™ Documentation </Typography>
+                </Paper>
             </Grid>
+            <Divider className={classes.divider} />
+
+            <Grid item xs={12} justify='center'>
+                    <MainImage src="./dds-lg.jpg" alt="background" />
+            </Grid>
+            <Grid item xs={6} sm={3}>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+            </Grid>
+                <Grid item xs={6} sm={3}>
+                    <Logo />
+                </Grid>
+        </Grid>
         </div>
     )
 }
 
-export default FullWidthGrid;
+FullWidthGrid.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+export default withStyles(styles)(FullWidthGrid);

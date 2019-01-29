@@ -38,11 +38,6 @@ export class Home extends Component {
                         <div class="mdc-card__media-content">
                         </div>
                     </Card>
-                    <p>
-                        <ul>
-                            <li><strong>Searchable Documentation</strong>. A single place <code>to search </code> and <code> download </code> reports, spiral analysis, manuals, etc. </li>
-                        </ul>
-                    </p>
                 </div>
                     <br />
                  <MainImage src="./dds-lg.jpg" alt="background" />
