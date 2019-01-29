@@ -5,7 +5,7 @@ const Logo = styled.h1`
   cursor: ${props => props.clickable ? 'pointer' : 'default' };
   margin: 10px;
   text-align: center;
-  font-family: 'Dancing Script', cursive;
+  font-family: 'Roboto', sans-serif;
 `
 
-export default ({ onClick }) => <Logo onClick={onClick} clickable={Boolean(onClick)}>Simple Blog</Logo>
+export default ({ onClick }) => <Logo onClick={onClick} clickable={Boolean(onClick)}>DirectDrive™ Systems - Spiral Docs</Logo>

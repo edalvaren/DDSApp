@@ -12,7 +12,17 @@ import { receiveMockState } from './actions/mock'
 
 import { loggedIn } from './utils/auth'
 import { startApp } from './actions/generic'
+import { createGlobalStyle } from "styled-components";
 
+export const GlobalStyles = createGlobalStyle`
+  h1 {
+    @import url('https://fonts.googleapis.com/css?family=Roboto');
+    font-family: 'Roboto', sans-serif;
+  }
+  h2 {
+     @import url('https://fonts.googleapis.com/css?family=Roboto');
+    font-family: 'Roboto', serif  };
+`
 const App = () => {
   return (
     <Provider store={store}>
