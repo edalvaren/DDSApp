@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 
-export class Search extends Component {
+export default class Search extends Component {
     static displayName = Search.displayName;
     constructor(props) {
         super(props);

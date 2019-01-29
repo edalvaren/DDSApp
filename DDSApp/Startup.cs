@@ -60,7 +60,8 @@ namespace DDSApp
                 builder =>
                 {
                     builder.AllowAnyMethod().AllowAnyHeader()
-                           .AllowCredentials();
+                           .AllowCredentials()
+                           .AllowAnyOrigin(); 
                 }));
 
 
@@ -171,7 +172,7 @@ namespace DDSApp
 
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://localhost:5000")
+                builder.WithOrigins("http://localhost:3000")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
@@ -191,7 +192,7 @@ namespace DDSApp
                 spa.Options.SourcePath = "ClientApp";
                 if (env.IsDevelopment())
                 {
-                    spa.UseReactDevelopmentServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
                 }
             });
 
