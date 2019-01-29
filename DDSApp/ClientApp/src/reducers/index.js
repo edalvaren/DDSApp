@@ -1,6 +1,5 @@
 import { combineReducers, createStore } from 'redux'
 import { reducer as formReducer } from 'redux-form'
-
 import navigation from './navigation'
 import auth from './auth'
 import cache from './cache'

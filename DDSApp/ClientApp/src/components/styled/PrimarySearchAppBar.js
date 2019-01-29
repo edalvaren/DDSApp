@@ -93,6 +93,7 @@ class PrimarySearchAppBar extends React.Component {
         mobileMoreAnchorEl: null,
     };
 
+
     handleProfileMenuOpen = event => {
         this.setState({ anchorEl: event.currentTarget });
     };
@@ -101,6 +102,11 @@ class PrimarySearchAppBar extends React.Component {
         this.setState({ anchorEl: null });
         this.handleMobileMenuClose();
     };
+
+
+    handleToggleDropDown = event => {
+        this.setState({ anchorEl: event.currentTarget });
+    }
 
     handleMobileMenuOpen = event => {
         this.setState({ mobileMoreAnchorEl: event.currentTarget });
@@ -125,8 +131,8 @@ class PrimarySearchAppBar extends React.Component {
                 onClose={this.handleMenuClose}
             >
                 <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-                <MenuItem onClick={this.handleToggleDropDown && this.handleUnauthorizedUser}>Logout</MenuItem>
                 <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+                <MenuItem onClick={this.handleToggleDropDown && this.handleUnauthorizedUser}>Logout</MenuItem>
             </Menu>
         );
 
@@ -213,6 +219,7 @@ class PrimarySearchAppBar extends React.Component {
 
 PrimarySearchAppBar.propTypes = {
     classes: PropTypes.object.isRequired,
+    handleUnauthorizedUser: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(PrimarySearchAppBar);

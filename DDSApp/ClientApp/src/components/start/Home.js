@@ -3,7 +3,6 @@ import '../../styles/index.scss';
 import {Card} from '@material-ui/core';
 import styled from 'styled-components';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
 
 export const Wrapper = styled.section`
     margin-top: 10px;

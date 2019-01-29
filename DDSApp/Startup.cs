@@ -172,7 +172,7 @@ namespace DDSApp
 
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://localhost:3000")
+                builder.WithOrigins("http://localhost:3000", "https://spiraldocs.com", "http://http://157.230.221.251")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();

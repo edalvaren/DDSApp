@@ -1,35 +1,20 @@
 import React from 'react'
-import {AppBar, Toolbar, Menu, MenuItem, IconButton } from '@material-ui/core'
-import { AccountCircle } from '@material-ui/icons'
-import styled from 'styled-components'
+// import {AppBar, Toolbar, Menu, MenuItem, IconButton } from '@material-ui/core'
+// import { AccountCircle } from '@material-ui/icons'
+// import styled from 'styled-components'
 import PrimarySearchBar from '../components/styled/PrimarySearchAppBar';
-import Logo from './logo';
+// import Logo from './logo';
 
 import * as actions from '../actions/navbar'
 import { to } from '../actions/navigation'
 import { unauthorizeUser } from '../actions/auth'
 import { connectTo } from '../utils/generic'
 
-const StyledToolbar = styled(Toolbar)`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  },
-});
 
 export const Navbar = ({ unauthorizeUser, dropdownOpen, dropdownAnchor, toggleDropdown }) => {
   return (
-    <PrimarySearchBar />
+    <PrimarySearchBar handleUnauthorizedUser={() => toggleDropdown && unauthorizeUser } />
   )
 }
 

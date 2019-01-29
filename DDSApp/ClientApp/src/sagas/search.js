@@ -4,7 +4,6 @@ import { post } from '../utils/api'
 import { startApp } from '../actions/generic'
 import { to } from '../actions/navigation'
 import {receiveSearchResults} from '../actions/search'
-import { submitQuery } from '../actions/search'
 import {SEARCH} from '../constants/api/'
 
 const searchSaga = (url, thanGoTo) =>
