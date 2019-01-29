@@ -48,7 +48,7 @@ namespace DDSApp
         public void ConfigureServices(IServiceCollection services)
         {
             jwtSecret = Configuration["JWT:JWTSecretKey"];
-            connectionString = Configuration["DB:Postgres"]; 
+            connectionString = Configuration["DB:ConnectionString"]; 
             #region Cookies and CORS
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -68,15 +68,15 @@ namespace DDSApp
 
             #region Database
 
-            services.AddEntityFrameworkNpgsql()
-                .AddDbContext<SpiralDocsContext>(options =>
-                options.UseNpgsql(
-                    Configuration.GetConnectionString("BlogContext"),
-                    o => o.MigrationsAssembly("Blog.API")
-                    )
-                );
-            //services.AddDbContext<SpiralDocsContext>
-            //    (options => options.UseSqlServer(connectionString));
+            //services.AddEntityFrameworkNpgsql()
+            //    .AddDbContext<SpiralDocsContext>(options =>
+            //    options.UseNpgsql(
+            //        Configuration.GetConnectionString("BlogContext"),
+            //        o => o.MigrationsAssembly("Blog.API")
+            //        )
+            //    );
+            services.AddDbContext<SpiralDocsContext>
+                (options => options.UseSqlServer(connectionString));
             #endregion
             #region Authentication 
 

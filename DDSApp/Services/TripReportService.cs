@@ -12,7 +12,6 @@ namespace DDSApp.Services
     public class TripReportService
     {
         private readonly IMongoCollection<TripReport> _tripReports;
-        private readonly static string dbName = "SpiralDb"; 
 
         public TripReportService(IConfiguration config)
         {
