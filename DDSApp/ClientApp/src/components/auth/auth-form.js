@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Paper, Button } from '@material-ui/core'
-
+import {themeDark} from '../styled/utils/colors'
 import Logo from '../logo'
 import Page from '../page-wrapper'
 import { submitAsyncValidation} from '../../utils/forms'
@@ -49,7 +49,7 @@ export default ({ handleSubmit, enabledSubmit, onSubmit, submitText, onBottomTex
           <SubmitButton type="submit" variant="outlined" disabled={!enabledSubmit}>{submitText}</SubmitButton>
         </Form>
       </Container>
-      <BottomText onClick={onBottomTextClick} color='primary' size='small'>{bottomText}</BottomText>
+      <BottomText onClick={onBottomTextClick} color='inherit' size='small'>{bottomText}</BottomText>
     </Page>
   )
 }

@@ -1,7 +1,7 @@
 import styled, {css} from 'styled-components';
 import React from 'react';
 import rem from './utils/rem';
-import {lightGrey, themeDark, themeBlue, themeMedium, themeLight} from './utils/colors';
+import {lightGrey, themeDark, themeBlue, themeMedium} from './utils/colors';
 import { headerFont } from './utils/fonts';
 
 

@@ -6,12 +6,9 @@
     "@material-ui/core": "^3.1.0",
     "@material-ui/icons": "^3.0.1",
     "babel-plugin-root-import": "^6.1.0",
-<<<<<<< HEAD
-    "bulma": "^0.7.2",
-=======
     "eslint": "^5.12.1",
->>>>>>> 270e46894e55410f65596c88e852661f0da8cfad
     "lodash": "^4.17.11",
+    "node-sass": "^4.11.0",
     "react": "^16.5.2",
     "react-app-rewired": "^2.0.3",
     "react-bulma-components": "^2.3.0",
@@ -20,6 +17,7 @@
     "react-hotkeys": "^1.1.4",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.5",
+    "reactstrap": "^7.1.0",
     "redux": "^4.0.0",
     "redux-act": "^1.7.4",
     "redux-form": "^7.4.2",

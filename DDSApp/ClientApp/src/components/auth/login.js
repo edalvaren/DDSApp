@@ -1,6 +1,5 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
-
 import { submitLogin } from '../../actions/auth'
 import { to } from '../../actions/navigation'
 import { required, email, minLength6, lengthLessThan40 } from '../../validators/forms';
@@ -40,6 +39,7 @@ export default connectTo(
         />
       ]
       return (
+        <div>
         <AuthForm
           fields={fields}
           handleSubmit={handleSubmit}
@@ -49,6 +49,7 @@ export default connectTo(
           onBottomTextClick={() => to('register')}
           bottomText="Don't have an account? Register"
         />
+        </div>
       )
     }
   )

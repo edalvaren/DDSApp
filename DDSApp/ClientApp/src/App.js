@@ -2,17 +2,19 @@ import React from 'react'
 import { Provider } from 'react-redux'
 
 import './utils/array-extensions'
+import { MuiThemeProvider } from '@material-ui/core/styles'
+import { Theme } from './utils/theme';
 
 import store from './store'
 import saga from './sagas/'
 import Root from './layouts/main'
 import { sagaMiddleware } from './middleware'
-
+import './styles/App.scss'
 import { receiveMockState } from './actions/mock'
-
 import { loggedIn } from './utils/auth'
 import { startApp } from './actions/generic'
 import { createGlobalStyle } from "styled-components";
+
 
 export const GlobalStyles = createGlobalStyle`
   h1 {
@@ -25,11 +27,15 @@ export const GlobalStyles = createGlobalStyle`
 `
 const App = () => {
   return (
+    <MuiThemeProvider theme={Theme}>
     <Provider store={store}>
       <Root />
     </Provider>
+    </MuiThemeProvider>
   )
 }
+
+
 
 export default App
 
