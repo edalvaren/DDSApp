@@ -1,5 +1,4 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import blueGrey from '@material-ui/core/colors/blueGrey';
 
 export const Theme = createMuiTheme({
     palette: {
@@ -8,6 +7,11 @@ export const Theme = createMuiTheme({
         },
         secondary: {
             main: '#b71c1c',
+            contrastText: '#ffcc00',
+
         },
     },
+    typography: {
+        useNextVariants: true,
+    }
 });

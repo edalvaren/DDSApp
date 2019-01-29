@@ -8,7 +8,6 @@ import { connectTo } from '../utils/generic'
 import { PAGES_WITH_NAVBAR } from '../constants/navigation'
 
 import styled from 'styled-components'
-import ImageAvatars from '../images/ImageAvatars';
 import {Navbar} from '../components/navbar';
 
 const Layout = styled.div`

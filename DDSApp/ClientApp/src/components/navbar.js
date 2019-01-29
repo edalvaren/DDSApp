@@ -16,40 +16,58 @@ const StyledToolbar = styled(Toolbar)`
   justify-content: space-between;
 `
 
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing.unit * 2,
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+});
+
 export const Navbar = ({ unauthorizeUser, dropdownOpen, dropdownAnchor, toggleDropdown }) => {
   return (
-    <AppBar position='static'>
-      <PrimarySearchBar>
-        <div>
-          <IconButton
-            aria-owns={dropdownOpen ? 'menu-appbar' : null}
-            aria-haspopup="true"
-            onClick={({ currentTarget }) => toggleDropdown(currentTarget)}
-            color='primary'
-          >
-            <AccountCircle />
-          </IconButton>
-          <Menu
-            id="menu-appbar"
-            anchorEl={dropdownAnchor}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
-            }}
-            open={dropdownOpen}
-            onClose={toggleDropdown}
-          >
-            <MenuItem onClick={() => toggleDropdown() && unauthorizeUser()}>Logout</MenuItem>
-          </Menu>
-        </div>
-      </PrimarySearchBar>
-    </AppBar>
+    <PrimarySearchBar />
   )
 }
+
+
+// export const Navbar = ({ unauthorizeUser, dropdownOpen, dropdownAnchor, toggleDropdown }) => {
+//   return (
+//     <AppBar position='static'>
+//         <div>
+//         <PrimarySearchBar>
+//           <IconButton
+//             aria-owns={dropdownOpen ? 'menu-appbar' : null}
+//             aria-haspopup="true"
+//             onClick={({ currentTarget }) => toggleDropdown(currentTarget)}
+//             color='primary'
+//           >
+//             <AccountCircle />
+//           </IconButton>
+//           <Menu
+//             id="menu-appbar"
+//             anchorEl={dropdownAnchor}
+//             anchorOrigin={{
+//               vertical: 'top',
+//               horizontal: 'right',
+//             }}
+//             transformOrigin={{
+//               vertical: 'top',
+//               horizontal: 'right',
+//             }}
+//             open={dropdownOpen}
+//             onClose={toggleDropdown}
+//           >
+//             <MenuItem onClick={() => toggleDropdown() && unauthorizeUser()}>Logout</MenuItem>
+//           </Menu>
+//         </PrimarySearchBar>
+//         </div>
+//     </AppBar>
+//   )
+// }
 
 export default connectTo(
   state => state.navbar,

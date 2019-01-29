@@ -4,6 +4,8 @@ import { unauthorizeUser } from './actions/auth'
 
 export const sagaMiddleware = createSagaMiddleware()
 
+
+
 const localStorageMiddleware = store => next => action => {
   if (action.type === unauthorizeUser.getType()) {
     localStorage.clear()

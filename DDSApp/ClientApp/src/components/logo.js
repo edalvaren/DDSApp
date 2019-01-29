@@ -20,12 +20,12 @@ const styles = theme => ({
 });
 
 
-const LogoWrapper = styled.section`
+export const LogoWrapper = styled.section`
   padding: 2em;
   align-content: center;
 `;
 
-const LogoImage = styled.img`
+export const LogoImage = styled.img`
   margin: 5px;
   max-height: 65px;
   max-width: 155px;
