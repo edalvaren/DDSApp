@@ -6,6 +6,10 @@
     "@material-ui/core": "^3.1.0",
     "@material-ui/icons": "^3.0.1",
     "babel-plugin-root-import": "^6.1.0",
+<<<<<<< HEAD
+=======
+    "bulma": "^0.7.2",
+>>>>>>> 3fab367a98248d6198de7732e30a7349125746f5
     "eslint": "^5.12.1",
     "lodash": "^4.17.11",
     "node-sass": "^4.11.0",
