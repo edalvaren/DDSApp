@@ -9,8 +9,8 @@ namespace DDSApp.Services
     public class Keys : SecurityKey
     {
         public override int KeySize => 256;
-        private System.Text.Encoding _encoding = System.Text.Encoding.UTF8;
-        private string _keyString;
+        private readonly System.Text.Encoding _encoding = System.Text.Encoding.UTF8;
+        private readonly string _keyString;
         private readonly IConfiguration _config; 
         public SecurityKey MyKey { get; private set; }
 

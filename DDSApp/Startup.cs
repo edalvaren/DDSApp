@@ -22,7 +22,6 @@ namespace DDSApp
 {
     public class Startup
     {
-        private string connectionString = null; 
         private string _azureApiKey = null;
         private string jwtSecret = null;
         public Startup(IConfiguration configuration)
@@ -47,9 +46,8 @@ namespace DDSApp
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            jwtSecret = Configuration["JWT:JWTSecretKey"];
-            var jwtLifespan = 2592000; 
-            connectionString = Configuration["DB:ConnectionString"]; 
+            jwtSecret = Configuration["JWTSECRET"];
+            var jwtLifespan = 2592000;
             #region Cookies and CORS
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -63,6 +61,7 @@ namespace DDSApp
                     builder.AllowAnyMethod().AllowAnyHeader()
                            .AllowCredentials()
                            .WithOrigins(
+                        "http://localhost:5000",
                         "http://localhost:3000",
                            "http://spiraldocs.com",
                            "http://www.spiraldocs.com",
@@ -84,7 +83,7 @@ namespace DDSApp
             //        )
             //    );
             services.AddDbContext<SpiralDocsContext>
-                (options => options.UseSqlServer(connectionString));
+                (options => options.UseSqlServer(Configuration.GetConnectionString("FILEDB")));
             #endregion
             #region Authentication 
 
@@ -176,7 +175,7 @@ namespace DDSApp
 
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://localhost:3000", "https://spiraldocs.com", "http://http://157.230.221.251")
+                builder.WithOrigins("http://localhost:3000", "https://spiraldocs.com", "http://http://157.230.221.251", "http://localhost:5000")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
