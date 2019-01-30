@@ -48,8 +48,7 @@ namespace DDSApp
         public void ConfigureServices(IServiceCollection services)
         {
             jwtSecret = Configuration["JWT:JWTSecretKey"];
-            connectionString = "Server=tcp:directdrive.database.windows.net,1433;Initial Catalog=fileDb;Persist Security Info=False;User ID=ealvaren;Password=Directdrive201;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-
+            connectionString = Configuration["DB:ConnectionString"]; 
             #region Cookies and CORS
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -99,7 +98,7 @@ namespace DDSApp
                             ValidateIssuerSigningKey = true,
 
                             IssuerSigningKey = new SymmetricSecurityKey(
-                                Encoding.UTF8.GetBytes("c0445733 - 183c - 4ddf - 8130 - da79a5db31a4")
+                                Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JWTSecretKey"))
                             )
                         };
                     });
@@ -112,8 +111,8 @@ namespace DDSApp
 
             services.AddSingleton<IAuthService>(
                     new AuthService(
-                       "c0445733 - 183c - 4ddf - 8130 - da79a5db31a4",
-                       2592000
+                        Configuration.GetValue<string>("JWTSecretKey"),
+                        Configuration.GetValue<int>("JWTLifespan")
                     )
                 );
 
