@@ -1,7 +1,7 @@
 import { Badge } from 'reactstrap';
 import styled from 'styled-components';
 import React from 'react';
-import { themeDark, themeBlue} from '../../styled/utils/colors';
+import { themeDark} from '../../styled/utils/colors';
 
 
 const StyledBadge = styled(Badge)`

@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Paper, Button } from '@material-ui/core'
-import {themeDark} from '../styled/utils/colors'
 import Logo from '../logo'
 import Page from '../page-wrapper'
 import { submitAsyncValidation} from '../../utils/forms'

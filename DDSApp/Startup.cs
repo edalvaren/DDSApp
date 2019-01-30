@@ -48,7 +48,8 @@ namespace DDSApp
         public void ConfigureServices(IServiceCollection services)
         {
             jwtSecret = Configuration["JWT:JWTSecretKey"];
-            connectionString = Configuration["DB:ConnectionString"]; 
+            connectionString = "Server=tcp:directdrive.database.windows.net,1433;Initial Catalog=fileDb;Persist Security Info=False;User ID=ealvaren;Password=Directdrive201;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+
             #region Cookies and CORS
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -61,7 +62,13 @@ namespace DDSApp
                 {
                     builder.AllowAnyMethod().AllowAnyHeader()
                            .AllowCredentials()
-                           .AllowAnyOrigin(); 
+                           .WithOrigins(
+                        "http://localhost:3000",
+                           "http://spiraldocs.com",
+                           "http://www.spiraldocs.com",
+                           "https://spiraldocs.com",
+                           "https://www.spiraldocs.com",
+                           "https://157.230.221.251"); 
                 }));
 
 
@@ -92,7 +99,7 @@ namespace DDSApp
                             ValidateIssuerSigningKey = true,
 
                             IssuerSigningKey = new SymmetricSecurityKey(
-                                Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JWTSecretKey"))
+                                Encoding.UTF8.GetBytes("c0445733 - 183c - 4ddf - 8130 - da79a5db31a4")
                             )
                         };
                     });
@@ -105,8 +112,8 @@ namespace DDSApp
 
             services.AddSingleton<IAuthService>(
                     new AuthService(
-                        Configuration.GetValue<string>("JWTSecretKey"),
-                        Configuration.GetValue<int>("JWTLifespan")
+                       "c0445733 - 183c - 4ddf - 8130 - da79a5db31a4",
+                       2592000
                     )
                 );
 

@@ -1,4 +1,7 @@
 import React from 'react'
+
+import NavBarStyled from '../components/navbar'
+
 import * as pages from '../pages'
 
 import { to } from '../actions/navigation'
@@ -8,7 +11,6 @@ import { connectTo } from '../utils/generic'
 import { PAGES_WITH_NAVBAR } from '../constants/navigation'
 
 import styled from 'styled-components'
-import {Navbar} from '../components/navbar';
 
 const Layout = styled.div`
   min-height: 100%;
@@ -24,8 +26,7 @@ class MainLayout extends React.Component {
     const Page = pages[page]
     return (
       <Layout>
-
-        {PAGES_WITH_NAVBAR.includes(page) && <Navbar /> }
+        {PAGES_WITH_NAVBAR.includes(page) && <NavBarStyled />}
         <Page />
       </Layout>
     )

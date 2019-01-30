@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
+import LogoPic from '../images/logosmall.png';
 
 const styles = {
     avatar: {
@@ -10,17 +11,16 @@ const styles = {
     },
     bigAvatar: {
         margin: 10,
-        width: 60,
-        height: 60,
+        width: 150,
+        height: 63,
     },
 };
 
 function ImageAvatars(props) {
     const { classes } = props;
     return (
-        <Grid container justify="center" alignItems="center">
-            <Avatar alt="Remy Sharp" src="/static/images/logo.png" className={classes.avatar} />
-            <Avatar alt="Remy Sharp" src="/static/images//dds-lg.jpg" className={classes.bigAvatar} />
+        <Grid container justify="left" alignItems="left">
+            <Avatar alt="Intralox" src={LogoPic} className={classes.bigAvatar} />
         </Grid>
     );
 }

@@ -34,7 +34,7 @@ function FullWidthGrid(props) {
 
     return (
         <div className={classes.root}>
-        <Grid container spacing={16}>
+        <Grid container direction="row" spacing={16}>
             <Grid item xs={12}>
                 <Paper className={classes.paper}>
                     <Typography variant="h4" gutterbottom> Spiral WebApp </Typography>
