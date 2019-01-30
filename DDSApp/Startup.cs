@@ -48,6 +48,7 @@ namespace DDSApp
         public void ConfigureServices(IServiceCollection services)
         {
             jwtSecret = Configuration["JWT:JWTSecretKey"];
+            var jwtLifespan = 2592000; 
             connectionString = Configuration["DB:ConnectionString"]; 
             #region Cookies and CORS
             services.Configure<CookiePolicyOptions>(options =>
@@ -98,7 +99,7 @@ namespace DDSApp
                             ValidateIssuerSigningKey = true,
 
                             IssuerSigningKey = new SymmetricSecurityKey(
-                                Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JWTSecretKey"))
+                                Encoding.UTF8.GetBytes(jwtSecret)
                             )
                         };
                     });
@@ -110,10 +111,7 @@ namespace DDSApp
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddSingleton<IAuthService>(
-                    new AuthService(
-                        Configuration.GetValue<string>("JWTSecretKey"),
-                        Configuration.GetValue<int>("JWTLifespan")
-                    )
+                    new AuthService(jwtSecret, jwtLifespan)
                 );
 
             //these two services retrieve documents from mongodb 
