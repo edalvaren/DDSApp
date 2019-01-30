@@ -7,7 +7,7 @@ ASP.Net Core back end React.js Front End. Using Reactstrap and Styed Components.
 
 
 ## Run locally
-git clone https://github.com
+git clone https://github.com/edalvaren/DDSApp.git
 cd DDSApp
 cd DDSApp
 dotnet ef database update
