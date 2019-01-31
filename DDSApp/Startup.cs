@@ -22,9 +22,7 @@ namespace DDSApp
 {
     public class Startup
     {
-        private string _azureApiKey = null;
-        private string jwtSecret = null;
-        private string connString = null; 
+        private string _jwtSecret = null;
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -48,7 +46,7 @@ namespace DDSApp
         public void ConfigureServices(IServiceCollection services)
         {
 
-            jwtSecret = Configuration["JWTSECRET"];
+            _jwtSecret = Configuration["JWTSECRET"];
             var jwtLifespan = 2592000;
             #region Cookies and CORS
             services.Configure<CookiePolicyOptions>(options =>
@@ -85,7 +83,7 @@ namespace DDSApp
             //        )
             //    );
             services.AddDbContext<SpiralDocsContext>
-                (options => options.UseSqlServer(Configuration["DB:ConnectionString"]));
+                (options => options.UseSqlServer(Configuration.GetConnectionString("FILEDB")));
             #endregion
             #region Authentication 
 
@@ -100,7 +98,7 @@ namespace DDSApp
                             ValidateIssuerSigningKey = true,
 
                             IssuerSigningKey = new SymmetricSecurityKey(
-                                Encoding.UTF8.GetBytes(jwtSecret)
+                                Encoding.UTF8.GetBytes(_jwtSecret)
                             )
                         };
                     });
@@ -113,7 +111,7 @@ namespace DDSApp
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddSingleton<IAuthService>(
-                    new AuthService(jwtSecret, jwtLifespan)
+                    new AuthService(_jwtSecret, jwtLifespan)
                 );
 
             //these two services retrieve documents from mongodb 
@@ -141,7 +139,6 @@ namespace DDSApp
             );
 
             //Retrieve API Keys for Azure Blob Storage 
-            _azureApiKey = Configuration["Storage:UserKey1"];
         }
 
 
@@ -178,7 +175,7 @@ namespace DDSApp
 
             app.UseCors(builder =>
             {
-                builder.WithOrigins("http://localhost:3000", "https://spiraldocs.com", "http://http://157.230.221.251", "http://localhost:5000")
+                builder.WithOrigins("http://localhost:3000", "https://localhost:3000", "https://spiraldocs.com", "http://http://157.230.221.251", "https://localhost:5000", "http://localhost:5000")
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials();
