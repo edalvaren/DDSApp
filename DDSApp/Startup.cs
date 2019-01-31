@@ -24,6 +24,7 @@ namespace DDSApp
     {
         private string _azureApiKey = null;
         private string jwtSecret = null;
+        private string connString = null; 
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -46,6 +47,7 @@ namespace DDSApp
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
+
             jwtSecret = Configuration["JWTSECRET"];
             var jwtLifespan = 2592000;
             #region Cookies and CORS
@@ -83,7 +85,7 @@ namespace DDSApp
             //        )
             //    );
             services.AddDbContext<SpiralDocsContext>
-                (options => options.UseSqlServer(Configuration.GetConnectionString("FILEDB")));
+                (options => options.UseSqlServer(Configuration["DB:ConnectionString"]));
             #endregion
             #region Authentication 
 
@@ -105,6 +107,7 @@ namespace DDSApp
 
 
             #endregion
+
 
             // services.AddSingleton<Microsoft.Extensions.Hosting.IHostedService, ExampleService>();
             services.AddScoped<IUserRepository, UserRepository>();

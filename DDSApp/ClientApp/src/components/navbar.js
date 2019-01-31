@@ -1,27 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+import React from 'react'
+import { AppBar, Toolbar, Menu, MenuItem, IconButton } from '@material-ui/core'
+import { Menu as MenuIcon } from '@material-ui/icons'
+import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
-import Badge from '@material-ui/core/Badge';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import MailIcon from '@material-ui/icons/Mail';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MoreIcon from '@material-ui/icons/MoreVert';
-
-
+import PropTypes from 'prop-types';
+import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
+import LogoAvatar from '../images/ImageAvatars';
 import * as actions from '../actions/navbar'
 import { to } from '../actions/navigation'
 import { unauthorizeUser } from '../actions/auth'
 import { connectTo } from '../utils/generic'
+import flexbox from '@material-ui/system/flexbox';
 
 
 const styles = theme => ({
@@ -36,20 +28,22 @@ const styles = theme => ({
         marginRight: 20,
     },
     title: {
-        display: 'inline',
-        [theme.breakpoints.up('sm')]: {
-            display: 'block',
+        display: 'flex',
+        alignItems: 'flex-end',
+        [theme.breakpoints.up('xs')]: {
+            display: 'flex',
         },
     },
     search: {
         position: 'relative',
         borderRadius: theme.shape.borderRadius,
+        flexGrow: 1,
         backgroundColor: fade(theme.palette.common.white, 0.15),
         '&:hover': {
             backgroundColor: fade(theme.palette.common.white, 0.25),
         },
         marginRight: theme.spacing.unit * 2,
-        marginLeft: 0,
+        marginLeft: theme.spacing.unit * 2,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing.unit * 3,
@@ -79,9 +73,8 @@ const styles = theme => ({
         [theme.breakpoints.up('md')]: {
             width: 200,
         },
-    },
-    sectionDesktop: {
-        display: 'none',
+        sectionDesktop: {
+        display: 'flex',
         [theme.breakpoints.up('md')]: {
             display: 'flex',
         },
@@ -92,101 +85,36 @@ const styles = theme => ({
             display: 'none',
         },
     },
-});
-
-class Navbar extends React.Component {
-    state = {
-        anchorEl: null,
-        mobileMoreAnchorEl: null,
-    };
-
-
-    handleProfileMenuOpen = event => {
-        this.setState({ anchorEl: event.currentTarget });
-    };
-
-    handleMenuClose = () => {
-        this.setState({ anchorEl: null });
-        this.handleMobileMenuClose();
-    };
+    logoFlexBox:{
+        opacity: 0.7,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        border: 'solid',
+        borderColor: fade(theme.palette.primary.dark, 0.25)
+    },
+    },
+  })
 
 
-    handleToggleDropDown = event => {
-        this.setState({ anchorEl: event.currentTarget });
-    }
 
-    handleMobileMenuOpen = event => {
-        this.setState({ mobileMoreAnchorEl: event.currentTarget });
-    };
-
-    handleMobileMenuClose = () => {
-        this.setState({ mobileMoreAnchorEl: null });
-    };
-
-    render() {
-        const { anchorEl, mobileMoreAnchorEl } = this.state;
-        const { classes } = this.props;
-        const isMenuOpen = Boolean(anchorEl);
-        const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-        const renderMenu = (
-            <Menu
-                anchorEl={anchorEl}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={isMenuOpen}
-                onClose={this.handleMenuClose}
-            >
-                <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-                <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
-                <MenuItem onClick={this.handleToggleDropDown && this.handleUnauthorizedUser}>Logout</MenuItem>
-            </Menu>
-        );
-
-        const renderMobileMenu = (
-            <Menu
-                anchorEl={mobileMoreAnchorEl}
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={isMobileMenuOpen}
-                onClose={this.handleMobileMenuClose}
-            >
-                <MenuItem>
-                    <IconButton color="inherit">
-                        <Badge badgeContent={4} color="secondary">
-                            <MailIcon />
-                        </Badge>
-                    </IconButton>
-                    <p>Messages</p>
-                </MenuItem>
-                <MenuItem>
-                    <IconButton color="inherit">
-                        <Badge badgeContent={11} color="secondary">
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton>
-                    <p>Notifications</p>
-                </MenuItem>
-                <MenuItem onClick={this.handleProfileMenuOpen}>
-                    <IconButton color="inherit">
-                        <AccountCircle />
-                    </IconButton>
-                    <p>Profile</p>
-                </MenuItem>
-            </Menu>
-        );
-
-        return (
-            <div className={classes.root}>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer">
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-                            Spiral Docs - DirectDrive™
-                        </Typography>
-                        <div className={classes.search}>
+const navbar = ({classes, to, unauthorizeUser, dropdownOpen, dropdownAnchor, toggleDropdown}) => {
+  const itemHandler = func => () => {
+    toggleDropdown()
+    func()
+  }
+  return (
+    <AppBar position='static'>
+      <Toolbar>
+              <div className={classes.searcIcon}>       <IconButton
+                  aria-owns={dropdownOpen ? 'menu-appbar' : null}
+                  aria-haspopup="true"
+                  onClick={({ currentTarget }) => toggleDropdown(currentTarget)}
+                  color="inherit"
+              >
+                  <MenuIcon />
+              </IconButton>
+                     </div>
+            <div className={classes.search}>
                             <div className={classes.searchIcon}>
                                 <SearchIcon />
                             </div>
@@ -198,40 +126,51 @@ class Navbar extends React.Component {
                                 }}
                             />
                         </div>
-                        <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
 
-                            <IconButton
-                                aria-owns={isMenuOpen ? 'material-appbar' : undefined}
-                                aria-haspopup="true"
-                                onClick={this.handleProfileMenuOpen}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                        </div>
-                        <div className={classes.sectionMobile}>
-                            <IconButton aria-haspopup="true" onClick={this.handleMobileMenuOpen} color="inherit">
-                                <MoreIcon />
-                            </IconButton>
-                        </div>
-                    </Toolbar>
-                </AppBar>
-                {renderMenu}
-                {renderMobileMenu}
-            </div>
-        );
-    }
+      <div className={classes.grow} />
+                  <flexbox className={classes.logoFlexBox}>
+                  {/* <LogoAvatar /> */}
+        <Typography className={classes.title} variant="h6" color="inherit" noWrap>
+                    Spiral Docs | Intralox STG | 2019 &copy;
+          </Typography>
+                      </flexbox>
+
+                                  </div>
+
+          <Menu
+            id="menu-appbar"
+            anchorEl={dropdownAnchor}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={dropdownOpen}
+            onClose={toggleDropdown}
+          >
+            <MenuItem onClick={itemHandler(() => to (''))}> About </MenuItem>
+            <MenuItem onClick={itemHandler(() => to('documents'))}>Browse Documents</MenuItem>
+            <Divider />
+            <MenuItem onClick={itemHandler(unauthorizeUser)}>Sign out</MenuItem>
+            <MenuItem>About</MenuItem>
+          </Menu>
+      </Toolbar>
+    </AppBar>
+  )
 }
 
-Navbar.propTypes = {
+navbar.propTypes = {
     classes: PropTypes.object.isRequired,
     handleUnauthorizedUser: PropTypes.func.isRequired,
 };
 
 
 export default connectTo(
-    state => state.navbar,
-    { ...actions, to, unauthorizeUser },
-    withStyles(styles)(Navbar)
+  state => state.navbar,
+  { ...actions, to, unauthorizeUser },
+  withStyles(styles)(navbar)
 )

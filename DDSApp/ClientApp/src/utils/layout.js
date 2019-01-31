@@ -21,7 +21,7 @@ export const BodyWrapper = styled.div`
   text-align: left;
   margin: ${rem(40)} 0;
 
-  ${media.desktop`max-width: 900px;`}
-  ${media.tablet`max-width: 700px;`}
-  ${media.phone`max-width: 500px;`}
+  ${media.desktop`max-width: 850px;`}
+  ${media.tablet`max-width: 650px;`}
+  ${media.phone`max-width: 550px;`}
 `;

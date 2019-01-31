@@ -6,6 +6,8 @@ import * as genericSagas from './generic'
 import * as authActions from '../actions/auth'
 import * as authSagas from './auth'
 
+
+
 export default function* saga() {
   const relations = [
     [genericActions, genericSagas],

@@ -15,7 +15,7 @@ export const submitAsyncValidation = (
         new Promise((resolve, reject) => onSubmit({ values, resolve, reject }))
     )(e)
 }
-
+ 
 export const isValid = (state, formName) => isFormValid(state.form[formName])
 
 export const isFormValid = form => form && !form.syncErrors && !form.pristine

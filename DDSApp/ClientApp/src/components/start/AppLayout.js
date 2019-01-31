@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
 import {MainImage} from './Home';
-import Logo from '../logo';
+import {flexbox} from '@material-ui/system';
+
+// import SingleLineGrid from '../SingleLineGrid';
 
 const styles = theme => ({
     root: {
         flexGrow: 1,
+        overflow: 'auto',
     },
     container: {
         display: 'grid',
         gridTemplateColumns: 'repeat(12, 1fr)',
-        gridGap: `${theme.spacing.unit * 3}px`,
+        gridGap: `${theme.spacing.unit * 1}px`,
     },
     paper: {
         padding: theme.spacing.unit,
@@ -25,7 +25,7 @@ const styles = theme => ({
         marginBottom: theme.spacing.unit,
     },
     divider: {
-        margin: `${theme.spacing.unit * 2}px 0`,
+        margin: `${theme.spacing.unit * 1}px 0`,
     },
 });
 
@@ -36,26 +36,12 @@ function FullWidthGrid(props) {
         <div className={classes.root}>
         <Grid container direction="row" spacing={16}>
             <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                    <Typography variant="h4" gutterbottom> Spiral WebApp </Typography>
-                    <Typography variant="caption" gutterBottom> DirectDrive™ Documentation </Typography>
-                </Paper>
-            </Grid>
-            <Divider className={classes.divider} />
-
-            <Grid item xs={12} justify='center'>
-                    <MainImage src="./dds-lg.jpg" alt="background" />
-            </Grid>
-            <Grid item xs={6} sm={3}>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-            </Grid>
-            <Grid item xs={6} sm={3}>
-            </Grid>
-                <Grid item xs={6} sm={3}>
-                    <Logo />
-                </Grid>
-        </Grid>
+                {/* <SingleLineGrid /> */}
+                    <flexbox display="flex" overflow="auto" margin="0, 0, 0, 0" justifyContent="center">
+                        <MainImage src="https://spiraldocs.blob.core.windows.net/spiraldocs/dds-lg.jpg" alt="background" />
+                        </flexbox>
+                    </Grid>
+                    </Grid>
         </div>
     )
 }

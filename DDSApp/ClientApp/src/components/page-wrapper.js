@@ -16,7 +16,6 @@ const Loading = styled.div`
   justify-content: center;
   align-items: center;
 `
-
 class PageWrapper extends React.Component {
   render() {
     const {
@@ -48,7 +47,7 @@ class PageWrapper extends React.Component {
       </DocumentTitle>
     ) : (
       <Loading>
-        <CircularProgress/>
+        <CircularProgress co/>
       </Loading>
     )
   }

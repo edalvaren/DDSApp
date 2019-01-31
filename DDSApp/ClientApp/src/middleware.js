@@ -1,10 +1,16 @@
 import createSagaMiddleware from 'redux-saga'
-
+import axios from 'axios';
 import { unauthorizeUser } from './actions/auth'
+import { createLogicMiddleware } from 'redux-logic';
+import logic from './components/search-async-fetch/logic'
 
 export const sagaMiddleware = createSagaMiddleware()
 
+const deps = { // injected dependencies for logic
+  httpClient: axios
+};
 
+const logicMiddleware = createLogicMiddleware(logic, deps);
 
 const localStorageMiddleware = store => next => action => {
   if (action.type === unauthorizeUser.getType()) {
@@ -27,4 +33,4 @@ const localStorageMiddleware = store => next => action => {
   return result
 }
 
-export default [sagaMiddleware, localStorageMiddleware]
+export default [sagaMiddleware, localStorageMiddleware, logicMiddleware]

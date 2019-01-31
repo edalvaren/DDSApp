@@ -36,8 +36,15 @@ namespace DDSApp.Controllers
         //    return View();
         //}
 
+        [HttpGet]
+        public ActionResult<DocumentSearchResult> Get()
+        {
+            var data = _docsSearch.Get();
+            return data;
+        }
+
         [HttpGet("{searchQuery}", Name = "SearchbyQuery")]
-        public JsonResult Search(string searchQuery)
+        public JsonResult Search([FromQuery] string searchQuery)
         {
             if (string.IsNullOrWhiteSpace(searchQuery))
                 searchQuery = "*";

@@ -1,11 +1,14 @@
 ﻿using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using DDSApp.Models;
+using DDSApp.Models.Documents;
 
 namespace DDSApp.Models
 {
     public class SpiralDocsContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Doc> Docs { get; set; }
         public SpiralDocsContext(DbContextOptions<SpiralDocsContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -26,12 +29,25 @@ namespace DDSApp.Models
                 .Property(user => user.Username)
                 .HasMaxLength(60)
                 .IsRequired();
-
             modelBuilder.Entity<User>()
                 .Property(user => user.Email)
                 .HasMaxLength(60)
                 .IsRequired();
         }
+
+        
+        void ConfigureModelBuilderForDoc(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Doc>().ToTable("Documents");
+            modelBuilder.Entity<Doc>()
+                .Property(Doc => Doc.Title)
+                .HasMaxLength(60)
+                .IsRequired();
+            modelBuilder.Entity<Doc>()
+                .Property(user => user.Topic)
+                .IsRequired();
+        }
+
 
         void ConfigureModelBuilderForStory(ModelBuilder modelBuilder)
         {
@@ -49,7 +65,10 @@ namespace DDSApp.Models
                 .WithMany(u => u.Stories)
                 .HasForeignKey(s => s.OwnerId);
 
+        }
 
+        void ConfigureModelBuilderForDocumentCategory(ModelBuilder modelBuilder)
+        {
         }
 
         void ConfigureModelBuilderForLike(ModelBuilder modelBuilder)

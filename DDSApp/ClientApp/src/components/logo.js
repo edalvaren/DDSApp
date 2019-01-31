@@ -29,7 +29,9 @@ export const LogoImage = styled.img`
   margin: 5px;
   max-height: 65px;
   max-width: 155px;
+  cursor: ${props => props.clickable ? 'pointer' : 'default'};
 `;
+
 
 
 function Logo(props) {

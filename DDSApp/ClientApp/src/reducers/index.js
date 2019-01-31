@@ -4,15 +4,19 @@ import navigation from './navigation'
 import auth from './auth'
 import cache from './cache'
 import navbar from './navbar'
-
+import doc from './doc'
+import documents from './documents'
+import search from './search'
 import { unauthorizeUser } from '../actions/auth'
-import { receiveMockState } from '../actions/mock'
+import {reducer as searchReducer} from '../components/search-async-fetch/index'
 
 const form = () => formReducer
 
 const getNewReducer = _ =>
   combineReducers(
     Object.entries({
+      doc,
+      documents,
       navigation,
       auth,
       cache,
@@ -26,16 +30,21 @@ const getNewReducer = _ =>
       {}
     )
   )
+const reducerSearch = _ =>
+      combineReducers(
+        Object.entries({
+          search,
+          searchReducer,
+        })
+      )
+
+
 
 const reducer = getNewReducer()
 
 export default (state, action) => {
   if (action.type === unauthorizeUser.getType()) {
     return reducer(createStore(getNewReducer()).getState())
-  }
-
-  if (action.type === receiveMockState.getType()) {
-    return reducer(action.payload)
   }
 
   return reducer(state, action)

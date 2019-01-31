@@ -20,6 +20,7 @@ namespace DDSApp.Models
             CreateMap<Story, OwnerStoryViewModel>();
             CreateMap<Story, StoryViewModel>()
                 .ForMember(s => s.OwnerUsername, map => map.MapFrom(s => s.Owner.Username));
+            CreateMap<Doc, >
         }
     }
 }

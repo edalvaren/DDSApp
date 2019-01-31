@@ -18,6 +18,26 @@ namespace DDSApp.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DDSApp.Models.Doc", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Category");
+
+                    b.Property<string>("LastUpdate");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("Topic");
+
+                    b.Property<string>("Url");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Docs");
+                });
+
             modelBuilder.Entity("DDSApp.Models.Like", b =>
                 {
                     b.Property<string>("StoryId");
