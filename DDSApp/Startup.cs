@@ -1,7 +1,6 @@
 using DDSApp.Areas.Abstractions;
 using DDSApp.Areas.Repositories;
 using DDSApp.Services;
-using System.Linq; 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using System;
 using DDSApp.Models; 
 using System.Text;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +21,11 @@ namespace DDSApp
     public class Startup
     {
         private string _jwtSecret = null;
+
+        /// <summary>
+        /// Dependency injection of server configuration
+        /// </summary>
+        /// <param name="configuration"> Configuration called in pre-build by program entry point. </param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,8 +33,8 @@ namespace DDSApp
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        //these are my dependency injections
+        /*This method gets called by the runtime. Use this method to add services to the container.
+            these are my dependency injections */
         /// <summary>
         /// Method Adds Services to the Controller. These are my Dependency Injections
         ///
@@ -74,14 +77,11 @@ namespace DDSApp
             #endregion
 
             #region Database
-
-            //services.AddEntityFrameworkNpgsql()
-            //    .AddDbContext<SpiralDocsContext>(options =>
-            //    options.UseNpgsql(
-            //        Configuration.GetConnectionString("BlogContext"),
-            //        o => o.MigrationsAssembly("Blog.API")
-            //        )
-            //    );
+            
+            /* This maps to the Azure Database in directdrive.database.windows.net .. Database: FileDB
+             Connection string is stored in the appsecrets.json for development. Saved as an environment variable for production
+             TODO Store Secrets Securely using NGINX Vault 
+             */ 
             services.AddDbContext<SpiralDocsContext>
                 (options => options.UseSqlServer(Configuration.GetConnectionString("FILEDB")));
             #endregion
@@ -195,6 +195,8 @@ namespace DDSApp
                 spa.Options.SourcePath = "ClientApp";
                 if (env.IsDevelopment())
                 {
+                    /* Run the CRA server externally, independently of the ASP.NET Core process. */
+                    //spa.useReactDevelopmentServer(
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
                 }
             });

@@ -8,7 +8,6 @@ namespace DDSApp.Services
     public class DocsSearchService
     {
         private static ISearchIndexClient _indexClient;
-        private static ISearchServiceClient _searchClient;
 
         public static string errorMessage;
 
@@ -19,9 +18,9 @@ namespace DDSApp.Services
             {
                 string searchServiceName = config.GetSection("AzureSearch")["SearchServiceName"];
                 string adminApiKey = DocsSearchService.APIKey(config); 
-                _searchClient = new SearchServiceClient(searchServiceName, new SearchCredentials(adminApiKey));
+                ISearchServiceClient searchClient = new SearchServiceClient(searchServiceName, new SearchCredentials(adminApiKey));
                 //_indexClient = _searchClient.Indexes.GetClient("spiraldocsindex");
-                _indexClient = _searchClient.Indexes.GetClient("azureblob-index3");
+                _indexClient = searchClient.Indexes.GetClient("azureblob-index3");
             }
             catch (Exception e)
             {
@@ -52,7 +51,7 @@ namespace DDSApp.Services
                     IncludeTotalResultCount = false,
                     QueryType = QueryType.Simple,
                     Select = new[] { "people", "metadata_storage_path", "metadata_storage_name", "organizations", "locations", "keyphrases" },
-                    Top = 5
+                    //Top = 5
                 };
                 return _indexClient.Documents.Search(searchText, sp);
             }
